@@ -1,0 +1,21 @@
+<h1>post</h1>
+
+<%= link_to "post list", posts_path %>
+
+<% if @post==nil %>
+    <div style="text-align:center">could not find this post</div>
+<% else %>
+    <h1>
+      <div style="text-align:center">
+        <%= @post.title %>
+      </div>
+    </h1>
+    <div style="text-align:right">
+      <%= @post.author %>
+    </div>
+    <p>
+      <%= @post.content %>
+    </p>
+<% end %>
+
+<%= link_to "post list", posts_path %>

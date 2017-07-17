@@ -1,0 +1,21 @@
+<h1>Post list</h1>
+
+<p> There are <%= @posts.count %> post </p>
+
+<table border>
+  <tr>
+    <th> author </th>
+    <th> title </th>
+    <th> content </th>
+  </tr>
+  <% @posts.each do |post| %>
+  <tr>
+    <td><%= post.author %></td>
+    <td><%= post.title %></td>
+    <td><%= post.content %></td>
+  </tr>
+
+  <% end %>
+</table>
+
+<%= link_to "new post", new_post_path %>
