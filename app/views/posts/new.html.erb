@@ -1,26 +1,5 @@
 <h1>new post</h1>
 
-<%= form_for :post, url: posts_path do |f| %>
-    <p>
-      <strong><%= f.label :author, 'author' %></strong>
-      <br/>
-      <%= f.text_field :author %>
-    </p>
+<%= render 'form' %>
+<%= link_to 'post list', posts_path %>
 
-    <p>
-      <strong><%= f.label :title, 'title' %></strong>
-      <br/>
-      <%= f.text_field :title %>
-    </p>
-
-    <p>
-      <strong><%= f.label :content, 'content' %></strong>
-      <br/>
-      <%= f.text_area :content %>
-    </p>
-
-    <p>
-      <%= f.submit "submit" %>
-    </p>
-
-<% end %>

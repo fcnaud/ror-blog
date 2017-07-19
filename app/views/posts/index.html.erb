@@ -7,12 +7,21 @@
     <th> author </th>
     <th> title </th>
     <th> content </th>
+    <th> show </th>
+    <th> edit </th>
+    <th> delete </th>
+    <th> comment count</th>
   </tr>
   <% @posts.each do |post| %>
   <tr>
     <td><%= post.author %></td>
     <td><%= post.title %></td>
     <td><%= post.content %></td>
+    <td><%= link_to "more", post_path(post) %> </td>
+    <td><%= link_to "edit", edit_post_path(post)%></td>
+    <td><%= link_to "delete", post_path(post), method: :delete,
+                              data: { confirm: 'are you sure'} %></td>
+    <td><%= post.comments.count %></td>
   </tr>
 
   <% end %>

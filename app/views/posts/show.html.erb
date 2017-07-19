@@ -1,6 +1,7 @@
 <h1>post</h1>
 
 <%= link_to "post list", posts_path %>
+<%= link_to "edit", edit_post_path %>
 
 <% if @post==nil %>
     <div style="text-align:center">could not find this post</div>
@@ -19,3 +20,28 @@
 <% end %>
 
 <%= link_to "post list", posts_path %>
+<%= link_to "edit", edit_post_path %>
+
+
+<h1>comments list</h1>
+<%= render 'comments/show_comments' %>
+<!--
+<%= render @post.comments %>
+-->
+
+<h2>add comment</h2>
+<%= form_for([@post, @post.comments.build]) do |f| %>
+    <p>
+      <%= f.label :commenter %>
+      <%= f.text_field :commenter %>
+    </p>
+
+    <p>
+      <%= f.label :body %>
+      <%= f.text_area :body %>
+    </p>
+
+    <p>
+      <%= f.submit %>
+    </p>
+<% end %>
