@@ -23,8 +23,11 @@
                               data: { confirm: 'are you sure'} %></td>
     <td><%= post.comments.count %></td>
   </tr>
-
   <% end %>
 </table>
+
+<!--
+<%= render @posts %>
+-->
 
 <%= link_to "new post", new_post_path %>

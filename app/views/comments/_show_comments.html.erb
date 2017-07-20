@@ -2,6 +2,7 @@
 <% @post.comments.each do |comment| %>
     <p>
       <strong><%= cnt %></strong>
+      <%= link_to 'delete', post_comment_path(@post, comment), method: :delete %>
       <% cnt += 1 %>
     </p>
     <p>
