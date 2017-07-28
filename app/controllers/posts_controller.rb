@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
 
-  http_basic_authenticate_with name: 'dcf', password: 'fcnaud',
-                               except: [:index, :show]
+  before_action :auth_user, except: [:index, :show]
 
   def index
-    @posts = Post.all
+    # @posts = Post.all
+    @posts = Post.page(params[:page] || 1)
+                 .per_page(params[:per_page] || 10)
   end
 
   def new
@@ -12,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(edit_post_params)
+    @post = Post.new(new_post_params)
     if @post.save
       redirect_to @post
     else
@@ -46,13 +47,20 @@ class PostsController < ApplicationController
   end
 
 private
-    def post_params
-      params.require(:post).permit(:author, :title, :content)
+  def post_params
+    params.require(:post).permit(:title, :content)
+  end
+  def new_post_params
+    user = User.find(session[:user_id])
+    post_params.merge(author: user.username)
+  end
+  def edit_post_params
+    post_params
+  end
+  def auth_user
+    unless session[:user_id]
+      flash[:notice] = "please login first"
+      redirect_to new_session_path
     end
-    def new_post_params
-      post_params
-    end
-    def edit_post_params
-      post_params
-    end
+  end
 end

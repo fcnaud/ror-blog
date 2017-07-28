@@ -1,47 +1,59 @@
-<h1>post</h1>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="page-header">
+      <h1>Post
+        <%= link_to "edit", edit_post_path(@post), class: "btn btn-default" %>
+      </h1>
+    </div>
+  </div>
+</div>
 
-<%= link_to "post list", posts_path %>
-<%= link_to "edit", edit_post_path %>
 
 <% if @post==nil %>
     <div style="text-align:center">could not find this post</div>
 <% else %>
-    <h1>
-      <div style="text-align:center">
-        <%= @post.title %>
+
+    <div class="row">
+      <div class="col-lg-12" style="text-align:center">
+        <h1> <%= @post.title %> </h1>
       </div>
-    </h1>
-    <div style="text-align:right">
-      <%= @post.author %>
+      <div class="col-lg-3 col-lg-offset-6">
+        <h3>
+          ---- <%= @post.author %>
+        </h3>
+      </div>
     </div>
-    <p>
-      <%= @post.content %>
-    </p>
+
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2">
+        <p>
+          <%= @post.content %>
+        </p>
+      </div>
+    </div>
 <% end %>
 
-<%= link_to "post list", posts_path %>
-<%= link_to "edit", edit_post_path %>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="page-header">
+      <h2>
+        comments list
+      </h2>
+    </div>
+    <%= render 'comments/show_comments' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="page-header">
+      <h2>
+        add comment
+      </h2>
+    </div>
+  </div>
+</div>
+
+<%= render 'comments/add_comment_form' %>
 
 
-<h1>comments list</h1>
-<%= render 'comments/show_comments' %>
-<!--
-<%= render @post.comments %>
--->
-
-<h2>add comment</h2>
-<%= form_for([@post, @post.comments.build]) do |f| %>
-    <p>
-      <%= f.label :commenter %>
-      <%= f.text_field :commenter %>
-    </p>
-
-    <p>
-      <%= f.label :body %>
-      <%= f.text_area :body %>
-    </p>
-
-    <p>
-      <%= f.submit %>
-    </p>
-<% end %>

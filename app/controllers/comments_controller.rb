@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  http_basic_authenticate_with name: 'dcf', password: 'fcnaud',
-                               only: :destroy
+
+  before_action :auth_user, only: [:destroy]
 
   def create
     @post = Post.find_by(id: params[:post_id])
@@ -11,12 +11,33 @@ class CommentsController < ApplicationController
   def destroy
     @post = Post.find_by(id: params[:post_id])
     @comment = @post.comments.find_by(id: params[:id])
-    @comment.destroy
-    redirect_to post_path(@post)
+    user = User.find(session[:user_id])
+    if user.username == @comment.commenter
+      @comment.destroy
+      redirect_to post_path(@post)
+    else
+
+    end
   end
 
-  private
-    def new_comment_params
-      params.require(:comment).permit(:commenter, :body)
+private
+  def comment_params
+    params.require(:comment).permit(:commenter, :body)
+  end
+  def new_comment_params
+    if session[:user_id]
+      user = User.find(session[:user_id])
+      comment_params.merge(commenter: user.username)
+    else
+      comment_params
     end
+  end
+
+  def auth_user
+    unless session[:user_id]
+      flash[:notice] = "please login first"
+      redirect_to new_session_path
+    end
+  end
+
 end

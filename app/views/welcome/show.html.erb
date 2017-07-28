@@ -1,0 +1,112 @@
+<div class="bs-docs-section">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Grid</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <p class="lead">all row</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="col-lg-4", style="background-color: #2E2F30">
+        <h1>left</h1>
+      </div>
+      <div class="col-lg-8", style="background-color: #730E15">
+        <h1>right</h1>
+      </div>
+      <div class="col-lg-6 col-lg-offset-3" style="background-color: #BBBBBB">
+        center
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bs-docs-section">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Text</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="bs-component">
+        <h1>我是标题1 h1</h1>
+        <h2>我是标题2 h2</h2>
+        <h3>我是标题3 h3</h3>
+        <h4>我是标题4 h4</h4>
+        <h5>我是标题5 h5</h5>
+        <h6>我是标题6 h6</h6>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <h1>我是标题1 h1. <small>我是副标题1 h1</small></h1>
+      <h2>我是标题2 h2. <small>我是副标题2 h2</small></h2>
+      <h3>我是标题3 h3. <small>我是副标题3 h3</small></h3>
+      <h4>我是标题4 h4. <small>我是副标题4 h4</small></h4>
+      <h5>我是标题5 h5. <small>我是副标题5 h5</small></h5>
+      <h6>我是标题6 h6. <small>我是副标题6 h6</small></h6>
+    </div>
+
+    <div class="col-lg-4">
+
+    </div>
+
+    <div class="col-lg-12">
+      <small>本行内容是在标签内</small><br>
+      <strong>本行内容是在标签内</strong><br>
+      <em>本行内容是在标签内，并呈现为斜体</em><br>
+      <p>本行内容是在标签内，并呈现为斜体本行内容是在标签内，并呈现为斜体本行内容是在标签内，并呈现为斜体</p>
+      <p class="text-left">向左对齐文本</p>
+      <p class="text-center">居中对齐文本</p>
+      <p class="text-right">向右对齐文本</p>
+      <p class="text-muted">本行内容是减弱的</p>
+      <p class="text-primary">本行内容带有一个 primary class</p>
+      <p class="text-success">本行内容带有一个 success class</p>
+      <p class="text-info">本行内容带有一个 info class</p>
+      <p class="text-warning">本行内容带有一个 warning class</p>
+      <p class="text-danger">本行内容带有一个 danger class</p>
+    </div>
+    <div class="col-lg-12">
+      <h2>Emphasis classes</h2>
+      <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>
+      <p class="text-primary">Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+      <p class="text-warning">Etiam porta sem malesuada magna mollis euismod.</p>
+      <p class="text-danger">Donec ullamcorper nulla non metus auctor fringilla.</p>
+      <p class="text-success">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+      <p class="text-info">Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="bs-docs-section">
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>thead1</th>
+            <th>thead2</th>
+            <th>thead3</th>
+            <th>thead4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% 4.times.each do |i| %>
+              <tr>
+                <% 4.times.each do |j| %>
+                    <td>tbody<%= j %></td>
+                <% end %>
+              </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

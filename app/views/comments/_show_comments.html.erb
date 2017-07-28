@@ -1,17 +1,25 @@
 <% cnt = 1 %>
 <% @post.comments.each do |comment| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <%= letter_avatar_tag(Pinyin.t(comment.commenter), 50, class: "av img-circle") %>
+        <%= comment.commenter %>
+
+        <% if session[:user_id] %>
+            <% user = User.find_by(id: session[:user_id])%>
+            <% if user.username == comment.commenter %>
+                <%= link_to 'delete', post_comment_path(@post, comment), method: :delete, class: "btn btn-default"%>
+            <% end %>
+        <% end %>
+
+      </div>
+      <div class="panel-body">
+        <strong>Comment: </strong>
+        <%= comment.body %>
+      </div>
+    </div>
     <p>
-      <strong><%= cnt %></strong>
-      <%= link_to 'delete', post_comment_path(@post, comment), method: :delete %>
       <% cnt += 1 %>
     </p>
-    <p>
-      <strong>Commenter: </strong>
-      <%= comment.commenter %>
-    </p>
-    <p>
-      <strong>Comment: </strong>
-      <%= comment.body %>
-    </p>
-    <br/>
 <% end %>
+
