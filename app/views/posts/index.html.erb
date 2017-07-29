@@ -36,6 +36,8 @@
       <% end %>
       </tbody>
     </table>
-    <%= will_paginate @posts, class: "pagination" %>
+    <div class="apple_pagination">
+      <%= will_paginate @posts %>
+    </div>
   </div>
 </div>
