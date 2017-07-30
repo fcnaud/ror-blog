@@ -33,11 +33,5 @@ private
     end
   end
 
-  def auth_user
-    unless session[:user_id]
-      flash[:notice] = "please login first"
-      redirect_to new_session_path
-    end
-  end
 
 end

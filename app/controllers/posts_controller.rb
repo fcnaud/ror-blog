@@ -3,7 +3,6 @@ class PostsController < ApplicationController
   before_action :auth_user, except: [:index, :show]
 
   def index
-    # @posts = Post.all
     @posts = Post.page(params[:page] || 1)
                  .per_page(params[:per_page] || 10)
   end
@@ -51,16 +50,9 @@ private
     params.require(:post).permit(:title, :content)
   end
   def new_post_params
-    user = User.find(session[:user_id])
-    post_params.merge(author: user.username)
+    post_params.merge(author: current_user.username)
   end
   def edit_post_params
     post_params
-  end
-  def auth_user
-    unless session[:user_id]
-      flash[:notice] = "please login first"
-      redirect_to new_session_path
-    end
   end
 end

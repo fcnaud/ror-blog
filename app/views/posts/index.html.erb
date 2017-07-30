@@ -18,8 +18,8 @@
         <th>author</th>
         <th>title</th>
         <th>content</th>
-        <th>delete</th>
         <th>comment count</th>
+        <th>delete</th>
       </tr>
       </thead>
       <tbody>
@@ -28,10 +28,10 @@
             <td><%= post.id %></td>
             <td><%= post.author %></td>
             <td><%= post.title %></td>
-            <td><%= link_to post.content[0..4], post_path(post) %></td>
+            <td><%= link_to post.content[0..100], post_path(post) %></td>
+            <td><%= post.comments.count %></td>
             <td><%= link_to "delete", post_path(post), method: :delete,
                             data: { confirm: "delete post?"} %></td>
-            <td><%= post.comments.count %></td>
           </tr>
       <% end %>
       </tbody>
