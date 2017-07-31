@@ -26,13 +26,19 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find_by(id: params[:id])
-    @post.destroy
-
-    redirect_to posts_path
+    if @post.author == current_user.username
+      @post.destroy
+      redirect_to posts_path
+    else
+      render file: 'public/403.html'
+    end
   end
 
   def edit
     @post = Post.find_by(id: params[:id])
+    unless @post.author == current_user.username
+      render file: 'public/403.html'
+    end
   end
 
   def update

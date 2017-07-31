@@ -2,7 +2,9 @@
   <div class="col-lg-12">
     <div class="page-header">
       <h1>Post
+        <% if logged_in? && @post.author==current_user.username%>
         <%= link_to "edit", edit_post_path(@post), class: "btn btn-default" %>
+        <% end -%>
       </h1>
     </div>
   </div>
@@ -26,9 +28,9 @@
 
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2">
-        <p>
+        <div class="well">
           <%= @post.content %>
-        </p>
+        </div>
       </div>
     </div>
 <% end %>
@@ -40,9 +42,10 @@
         comments list
       </h2>
     </div>
-    <%= render 'comments/show_comments' %>
   </div>
 </div>
+
+<%= render 'comments/show_comments' %>
 
 <div class="row">
   <div class="col-lg-12">
@@ -55,5 +58,6 @@
 </div>
 
 <%= render 'comments/add_comment_form' %>
+
 
 

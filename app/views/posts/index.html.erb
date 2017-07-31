@@ -19,25 +19,25 @@
         <th>title</th>
         <th>content</th>
         <th>comment count</th>
-        <th>delete</th>
       </tr>
       </thead>
       <tbody>
       <% @posts.each do |post| %>
           <tr>
             <td><%= post.id %></td>
-            <td><%= post.author %></td>
+            <td>
+              <%= link_to post.author, user_path(User.find_by(username: post.author)) %>
+            </td>
             <td><%= post.title %></td>
             <td><%= link_to post.content[0..100], post_path(post) %></td>
             <td><%= post.comments.count %></td>
-            <td><%= link_to "delete", post_path(post), method: :delete,
-                            data: { confirm: "delete post?"} %></td>
           </tr>
       <% end %>
       </tbody>
     </table>
-    <div class="apple_pagination">
-      <%= will_paginate @posts %>
+    <div>
+      <%= will_paginate @posts, class: "pagination" %>
     </div>
+
   </div>
 </div>

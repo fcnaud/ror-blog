@@ -25,8 +25,12 @@
             <ui class="nav navbar-nav navbar-right">
               <% if logged_in? %>
               <li>
-                <%= link_to "#{current_user.username},log out", session_url(id: session[:user_id]), method: :delete,
-                date: {confirm: "log out"}%>
+                <%= link_to "#{current_user.username}", user_path(current_user) %>
+              </li>
+              <li>
+                <%= link_to "log out",
+                            session_url(id: session[:user_id]), method: :delete,
+                            date: {confirm: "log out"}%>
               </li>
               <% else %>
               <li>

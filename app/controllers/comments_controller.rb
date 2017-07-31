@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
       @comment.destroy
       redirect_to post_path(@post)
     else
-
+      render file: 'public/403.html'
     end
   end
 
@@ -32,6 +32,5 @@ private
       comment_params
     end
   end
-
 
 end
