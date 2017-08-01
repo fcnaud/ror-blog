@@ -1,17 +1,11 @@
 <div class="row">
   <div class="col-lg-6 col-lg-offset-3">
-    <div class="col-lg-12">
-      <div class="page-header">
-        <h1>User Sign</h1>
-      </div>
-    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading"> sign up </div>
+      <div class="panel-body">
+        <div class="col-lg-12">
 
-    <div class="col-lg-12">
-
-      <%= form_for @user, html: {class: "form-horizontal"} do |f| %>
-
-          <fieldset>
-
+          <%= form_for @user, html: {class: "form-horizontal"} do |f| %>
             <% if @user.errors.any? %>
                 <div class="alert alert-danger">
                   <%= pluralize(@user.errors.count, 'error') %>
@@ -20,32 +14,25 @@
                         <li><%= msg %></li>
                     <% end %>
                   </ul>
-
                 </div>
-
             <% end %>
 
             <div class="form-group">
-              <%= f.label :username, 'username', class: "col-lg-2 control-label" %>
-              <div class="col-lg-8">
-                <%= f.text_field :username , class: "form-control" %>
-              </div>
+              <%= f.text_field :username , class: "form-control", placeholder: "username" %>
             </div>
             <div class="form-group">
-              <%= f.label :password, 'password', class: "col-lg-2 control-label" %>
-              <div class="col-lg-8">
-                <%= f.text_field :password , class: "form-control" %>
-              </div>
+              <%= f.text_field :password , class: "form-control", placeholder: "password" %>
             </div>
 
             <div class="form-group">
-              <div class="col-lg-10 col-lg-offset-2">
-                <%= f.submit "Sign up", class: 'btn btn-default'%>
-                <%= link_to "Log in", new_session_path, class: "btn" %>
+                <%= f.submit "Sign up", class: 'btn btn-primary'%>
+                <%= link_to "Log in", new_session_path, class: "btn btn-default" %>
               </div>
             </div>
-          </fieldset>
-      <% end %>
+          <% end %>
+        </div>
+
+      </div>
     </div>
 
   </div>

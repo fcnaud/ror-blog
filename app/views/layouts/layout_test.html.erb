@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog</title>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+<header>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <%= link_to "Home", root_path, class: "navbar-brand" %>
+      </div>
+
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><%= link_to "Posts", posts_path, class: "active" %></li>
+          <li><%= link_to "NewPost", new_post_path %></li>
+          <li><%= link_to "Users", users_path %></li>
+        </ul>
+        <ui class="nav navbar-nav navbar-right">
+          <% if logged_in? %>
+              <li>
+                <%= link_to "#{current_user.username}", user_path(current_user) %>
+              </li>
+              <li>
+                <%= link_to "log out",
+                            session_url(id: session[:user_id]), method: :delete,
+                            date: {confirm: "log out"}%>
+              </li>
+          <% else %>
+              <li>
+                <%= link_to "Login", new_session_path %>
+              </li>
+              <li>
+                <%= link_to "Sign up", new_user_path %>
+              </li>
+          <% end %>
+        </ui>
+      </div>
+
+    </div>
+  </nav>
+</header>
+
+<%= yield %>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <p>This is footer</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,14 +1,13 @@
 <div class="row">
-  <div class="col-lg-12">
-    <div class="page-header">
-      <h1>Edit
-        <%= link_to "return", post_path(@post), class: "btn btn-default" %>
-      </h1>
+  <div class="panel panel-default">
+    <div class="panel-heading"> edit </div>
+    <div class="panel-body">
+      <div class="col-lg-12">
+        <%= render 'form' %>
+      </div>
     </div>
   </div>
 </div>
-
-<%= render 'form' %>
 
 
 

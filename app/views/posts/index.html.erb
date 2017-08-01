@@ -1,43 +1,54 @@
 <div class="row">
-  <div class="col-lg-12">
-    <div class="page-header">
-      <h1>Post List</h1>
+  <div class="col-lg-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">post list</div>
+      <div class="panel-body topics">
+        <div class="topics-group">
+          <% @posts.each do |post| %>
+              <div class="topic media">
+                <div class="avatar media-left">
+                  <a href=<%= user_path(User.find_by(username: post.author)) %> >
+                    <%= letter_avatar_tag Pinyin.t(post.author), 48, class: "av img-circle" %>
+                  </a>
+                </div>
+                <div class="infos media-body">
+                  <div class="title media-heading"> <%= link_to post.title, post_path(post) %> </div>
+                  <div class="info">
+                    <%= link_to post.author, user_path(User.find_by(username: post.author)), class: "user-name" %>
+                    •
+                    create
+                    <%= post.created_at %>
+                  </div>
+                </div>
+                <div class="count media-right">
+                  <a class="state-false"><%= post.comments.count %></a>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <div>
+          <%= will_paginate @posts, class: "pagination" %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= link_to "new post", new_post_path, class: "btn btn-primary btn-block"%>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">something i don't know</div>
+      <ul class="list-group">
+        <li class="list-group-item">hello world</li>
+        <li class="list-group-item">hello world</li>
+        <li class="list-group-item">hello world</li>
+      </ul>
     </div>
   </div>
 </div>
 
-
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1">
-    <p> There are <%= @posts.count %> post </p>
-
-    <table class="table table-striped table-hover">
-      <thead>
-      <tr>
-        <th>id</th>
-        <th>author</th>
-        <th>title</th>
-        <th>content</th>
-        <th>comment count</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @posts.each do |post| %>
-          <tr>
-            <td><%= post.id %></td>
-            <td>
-              <%= link_to post.author, user_path(User.find_by(username: post.author)) %>
-            </td>
-            <td><%= post.title %></td>
-            <td><%= link_to post.content[0..100], post_path(post) %></td>
-            <td><%= post.comments.count %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-    <div>
-      <%= will_paginate @posts, class: "pagination" %>
-    </div>
-
-  </div>
-</div>
