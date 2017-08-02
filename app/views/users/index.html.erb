@@ -4,8 +4,21 @@
     <div class="panel-body">
       <% @users.each do |user| %>
       <div class="col-lg-3">
-        <%= letter_avatar_tag Pinyin.t(user.username), 30, class: "av img-circle" %>
-        <%= link_to user.username, user_path(user) %>
+        <div class="media user-card">
+          <div class="media-left">
+            <a href=<%= user_path(user) %>>
+              <%= letter_avatar_tag Pinyin.t(user.username), 48, class: "av img-circle" %>
+            </a>
+          </div>
+          <div class="media-body">
+            <div class="media-heading">
+              <%= link_to user.username, user_path(user) %>
+            </div>
+            <div class="infos">
+              <%= Post.where("author = '#{user.username}'").count %> posts
+            </div>
+          </div>
+        </div>
       </div>
       <% end %>
 

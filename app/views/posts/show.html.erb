@@ -1,63 +1,39 @@
 <div class="row">
-  <div class="col-lg-12">
-    <div class="page-header">
-      <h1>Post
-        <% if logged_in? && @post.author==current_user.username%>
-        <%= link_to "edit", edit_post_path(@post), class: "btn btn-default" %>
-        <% end -%>
-      </h1>
-    </div>
-  </div>
-</div>
-
-
-<% if @post==nil %>
-    <div style="text-align:center">could not find this post</div>
-<% else %>
-
-    <div class="row">
-      <div class="col-lg-12" style="text-align:center">
-        <h1> <%= @post.title %> </h1>
-      </div>
-      <div class="col-lg-3 col-lg-offset-6">
-        <h3>
-          ---- <%= @post.author %>
-        </h3>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2">
-        <div class="well">
-          <%= @post.content %>
+  <div class="col-lg-9">
+    <div class="topic-detail panel panel-default">
+      <div class="panel-heading media">
+        <div class="media-body">
+          <h1 class="media-heading">
+            <%= @post.title %>
+          </h1>
+          <div class="infos">
+            <%= link_to @post.author, user_path(User.find_by(username: @post.author)), class: "user-name" %>
+            created at
+            <%= @post.created_at %>
+          </div>
+        </div>
+        <div class="media-right">
+          <a href=<%= user_path(User.find_by(username: @post.author)) %>>
+            <%= letter_avatar_tag(Pinyin.t(@post.author), 48, class: "av img-circle") %>
+          </a>
         </div>
       </div>
+      <div class="panel-body">
+        <%= @post.content %>
+      </div>
     </div>
-<% end %>
 
-<div class="row">
-  <div class="col-lg-12">
-    <div class="page-header">
-      <h2>
-        comments list
-      </h2>
+    <%= render 'comments/show_comments' %>
+    <%= render 'comments/add_comment_form' %>
+  </div>
+  <div class="col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">...</div>
+      <ul class="list-group">
+        <li class="list-group-item">...</li>
+        <li class="list-group-item">...</li>
+        <li class="list-group-item">...</li>
+      </ul>
     </div>
   </div>
 </div>
-
-<%= render 'comments/show_comments' %>
-
-<div class="row">
-  <div class="col-lg-12">
-    <div class="page-header">
-      <h2>
-        add comment
-      </h2>
-    </div>
-  </div>
-</div>
-
-<%= render 'comments/add_comment_form' %>
-
-
-
