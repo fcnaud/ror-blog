@@ -5,7 +5,7 @@
   <div class="panel-body topics">
     <div class="topics-group">
       <% @post.comments.each do |comment| %>
-      <div class="topic media">
+      <div class="topic media" id="comment-<%= comment.id %>">
         <div class="avatar media-left">
           <% user = User.find_by(username: comment.commenter) %>
           <a
@@ -38,7 +38,7 @@
         </div>
         <div class="media-right">
           <% if logged_in? && (current_user.username == comment.commenter) %>
-              <%= link_to "delete", post_comment_path(comment), method: :delete,
+              <%= link_to "delete", [comment.post, comment], method: :delete,
                           data: {confirm: "delete ?"} %>
           <% end %>
         </div>

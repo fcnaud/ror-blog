@@ -14,8 +14,10 @@
               <%= post.content[0..50] %>
             </div>
           </div>
-          <div class="media-right">
-            <a class="badge"><%= post.comments.count %></a>
+          <div class="count media-right">
+            <% if post.comments.any? %>
+            <%= link_to post.comments.count.to_s, post_path(post)+'#comment-'+post.comments.last.id.to_s %>
+            <% end %>
           </div>
         </li>
         <% end %>
