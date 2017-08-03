@@ -23,13 +23,22 @@
             </ul>
             <ui class="nav navbar-nav navbar-right">
               <% if logged_in? %>
-              <li>
-                <%= link_to "#{current_user.username}", user_path(current_user) %>
-              </li>
-              <li>
-                <%= link_to "log out",
-                            session_url(id: session[:user_id]), method: :delete,
-                            date: {confirm: "log out"}%>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <%= current_user.username %>
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="">
+                    <%= link_to current_user.username, user_path(current_user) %>
+                  </li>
+                  <li class="divider"></li>
+                  <li class="">
+                    <%= link_to "log out",
+                                session_url(id: session[:user_id]), method: :delete,
+                                date: {confirm: "log out"}%>
+                  </li>
+                </ul>
               </li>
               <% else %>
               <li>

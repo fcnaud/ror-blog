@@ -7,4 +7,5 @@ class User < ApplicationRecord
   # to do ...
 
   has_many :comments
+  has_many :posts
 end

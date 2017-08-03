@@ -22,6 +22,15 @@ class UsersController < ApplicationController
     @comments = @user.comments.page(params[:page] || 1).per_page(params[:per_page] || 10)
   end
 
+  def comments
+    @user = User.find(params[:id])
+    @comments = @user.comments.page(params[:page] || 1).per_page(params[:per_page] || 10)
+  end
+  def posts
+    @user = User.find(params[:id])
+    @posts = Post.page(params[:page] || 1).per_page(params[:per_page] || 10).where("author = '#{@user.username}'")
+  end
+
   private
     def new_user_params
       params.require(:user).permit(:username, :password)

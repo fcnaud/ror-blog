@@ -15,11 +15,11 @@
           created at <%= @user.created_at %>
         </div>
         <div class="item">
-          have <%= @posts.count %> posts
+          have <%= @user.posts.count %> posts
         </div>
         <div class="item">
           have
-          <%= @posts.map(&(->(post){post.comments.count})).sum %>
+          <%= @user.comments.count %>
           comments
         </div>
       </div>

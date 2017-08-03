@@ -7,7 +7,12 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  resources :users
+  resources :users do 
+    member do
+      get :comments
+      get :posts
+    end
+  end
   resources :sessions
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
