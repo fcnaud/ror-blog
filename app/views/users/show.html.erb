@@ -1,62 +1,20 @@
 <div class="row">
   <div class="col-lg-8">
-    <div class="panel panel-default">
-      <ui class="list-group">
-        <% @posts.each do |post| %>
-
-        <li class="meida list-group-item">
-          <div class="media-body">
-            <div class="title media-heading">
-              <h4><%= link_to post.title, post_path(post) %>
-                <small> created at <%= post.created_at %></small></h4>
-            </div>
-            <div class="info">
-              <%= post.content[0..50] %>
-            </div>
-          </div>
-          <div class="count media-right">
-            <% if post.comments.any? %>
-            <%= link_to post.comments.count.to_s, post_path(post)+'#comment-'+post.comments.last.id.to_s %>
-            <% end %>
-          </div>
-        </li>
-        <% end %>
-      </ui>
-      <div class="panel-footer">
-        <%= will_paginate @posts, class: "pagination" %>
-      </div>
-    </div>
-
-  </div>
-  <div class="col-lg-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">info</div>
-      <div class="panel-body">
-        <div class="media">
-          <div class="avatar media-left">
-            <%= letter_avatar_tag Pinyin.t(@user.username), 96, class: "av img-circle" %>
-          </div>
-          <div class="infos media-body">
-            <div class="item">
-              <h4>
-                <%= @user.username %>
-              </h4>
-            </div>
-            <div class="item">
-              created at <%= @user.created_at %>
-            </div>
-            <div class="item">
-              have <%= @posts.count %> posts
-            </div>
-            <div class="item">
-                have
-                <%= @posts.map(&(->(post){post.comments.count})).sum %>
-                comments
-            </div>
-          </div>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#posts" data-toggle="tab">posts</a></li>
+        <li><a href="#comments" data-toggle="tab">comments</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="posts">
+          <%= render 'post_list' %>
+        </div>
+        <div class="tab-pane" id="comments">
+          comments
         </div>
       </div>
-    </div>
+  </div>
+  <div class="col-lg-4">
+    <%= render 'user_info' %>
   </div>
 </div>
 

@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+  <div class="panel-heading">info</div>
+  <div class="panel-body">
+    <div class="media">
+      <div class="avatar media-left">
+        <%= letter_avatar_tag Pinyin.t(@user.username), 96, class: "av img-circle" %>
+      </div>
+      <div class="infos media-body">
+        <div class="item">
+          <h4>
+            <%= @user.username %>
+          </h4>
+        </div>
+        <div class="item">
+          created at <%= @user.created_at %>
+        </div>
+        <div class="item">
+          have <%= @posts.count %> posts
+        </div>
+        <div class="item">
+          have
+          <%= @posts.map(&(->(post){post.comments.count})).sum %>
+          comments
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
