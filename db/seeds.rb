@@ -16,3 +16,8 @@ Comment.all.each do |comment|
   end
 end
 
+Post.all.each do |post|
+  post.user_id = User.find_by(username: post.author).id
+  post.save
+end
+
