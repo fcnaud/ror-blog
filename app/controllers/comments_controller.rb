@@ -3,8 +3,17 @@ class CommentsController < ApplicationController
   before_action :auth_user, only: [:destroy]
 
   def create
+    if !logged_in?
+      redirect_to new_session_path
+      return
+    end
+
     @post = Post.find_by(id: params[:post_id])
-    @comment = @post.comments.create(new_comment_params)
+    @comment = @post.comments.build(new_comment_params)
+    current_user.comments << @comment
+    if !@comment.save
+      flash[:notice] = "comment failed"
+    end
     redirect_to post_path(@post)+'#comment-'+@post.comments.last.id.to_s
   end
 
@@ -25,12 +34,6 @@ private
     params.require(:comment).permit(:commenter, :body)
   end
   def new_comment_params
-    if session[:user_id]
-      user = User.find(session[:user_id])
-      comment_params.merge(commenter: user.username)
-    else
-      comment_params
-    end
+    comment_params.merge(commenter: current_user.username)
   end
-
 end

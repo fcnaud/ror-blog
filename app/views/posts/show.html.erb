@@ -19,12 +19,25 @@
         </div>
       </div>
       <div class="panel-body">
-        <%= @post.content %>
+        <%= sanitize markdown(@post.content) %>
       </div>
     </div>
 
     <%= render 'comments/show_comments' %>
-    <%= render 'comments/add_comment_form' %>
+    <% if logged_in? %>
+        <%= render 'comments/add_comment_form' %>
+    <% else %>
+        <div class="panel panel-default">
+          <div class="panel-heading">add comment</div>
+          <div class="panel-body">
+            需要
+            <%= link_to "login", new_session_path, class: "btn btn-primary"%>
+            后方可回复, 如果你还没有账号请点击这里
+            <%= link_to "sign up", new_user_path, class: "btn btn-danger" %>
+          </div>
+        </div>
+    <% end %>
+
   </div>
   <div class="col-lg-3">
     <div class="panel panel-default">

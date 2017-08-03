@@ -33,7 +33,7 @@
             </span>
           </div>
           <div class="markdown">
-            <%= comment.body %>
+            <%= sanitize markdown(comment.body) %>
           </div>
         </div>
         <div class="media-right">
