@@ -5,4 +5,6 @@ class User < ApplicationRecord
   validates :password, length: { minimum:6, message: "password too short"}
   # validate email format
   # to do ...
+
+  has_many :comments
 end

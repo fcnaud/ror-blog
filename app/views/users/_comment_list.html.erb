@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+  <ui class="list-group">
+    <% @comments.each do |comment| %>
+      <li class="list-group-item">
+        <div class="title media-heading">
+          <h4><%= link_to comment.post.title, post_path(comment.post) %>
+            <small>at <%= comment.created_at %></small>
+          </h4>
+        </div>
+        <div class="info">
+          <a href=<%= "#{post_path(comment.post)}#comment-#{comment.id}"%>>
+            <%= comment.body[0..50] %>
+          </a>
+        </div>
+      </li>
+    <% end %>
+  </ui>
+
+  <div class="panel-footer">
+    <%= will_paginate @comments, class: "pagination" %>
+  </div>
+</div>
