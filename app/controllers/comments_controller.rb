@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find_by(id: params[:post_id])
     @comment = @post.comments.create(new_comment_params)
-    redirect_to post_path(@post)
+    redirect_to post_path(@post)+'#comment-'+@post.comments.last.id.to_s
   end
 
   def destroy
