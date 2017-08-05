@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   get 'show-style' => 'welcome#show'
+  post 'markdown' => 'welcome#get_markdown'
 
   resources :posts do
     resources :comments
