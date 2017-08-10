@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     member do
       get :comments
       get :posts
+      get :follower
+      get :following
+      post :follow
+      post :unfollow
     end
   end
   resources :sessions

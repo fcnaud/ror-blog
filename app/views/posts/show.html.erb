@@ -14,7 +14,7 @@
         </div>
         <div class="media-right">
           <a href=<%= user_path(User.find_by(username: @post.author)) %>>
-            <%= letter_avatar_tag(Pinyin.t(@post.author), 48, class: "av img-circle") %>
+            <%= image_tag @post.user.avatar_url, class: 'avatar-48' %>
           </a>
         </div>
       </div>

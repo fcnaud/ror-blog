@@ -7,8 +7,8 @@
           <% @posts.each do |post| %>
               <div class="topic media">
                 <div class="avatar media-left">
-                  <a href=<%= user_path(User.find_by(username: post.author)) %> >
-                    <%= letter_avatar_tag Pinyin.t(post.author), 48, class: "av img-circle" %>
+                  <a href=<%= user_path(post.user) %> >
+                    <%= image_tag post.user.avatar_url, class: "avatar-48" %>
                   </a>
                 </div>
                 <div class="infos media-body">

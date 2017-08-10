@@ -14,7 +14,7 @@
           <% else %>
           >
           <% end %>
-            <%= letter_avatar_tag Pinyin.t(comment.commenter), 50, class: "av img-circle" %>
+            <%= image_tag comment.user.avatar_url, class: 'avatar-48' %>
           </a>
         </div>
         <div class="infos media-body">

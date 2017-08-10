@@ -1,0 +1,33 @@
+<% @users.each do |user| %>
+    <div class="col-lg-3">
+      <div class="media user-card">
+        <div class="media-left">
+          <a href=<%= user_path(user) %>>
+            <%= image_tag user.avatar_url, class: 'avatar-48' %>
+          </a>
+        </div>
+        <div class="media-body">
+          <div class="media-heading">
+            <%= link_to user.username, user_path(user) %>
+          </div>
+          <% if logged_in? && not_current_user?(user) %>
+              <div class="infos">
+                <div class="opts">
+                  <% if following? user %>
+                      <a class="button-follow-user active" data-id="<%= user.id %>" href="#">
+                        <i class="fa fa-user"></i>
+                        <span>unfollow</span>
+                      </a>
+                  <% else %>
+                      <a class="button-follow-user" data-id="<%= user.id %>" href="#">
+                        <i class="fa fa-user"></i>
+                        <span>follow</span>
+                      </a>
+                  <% end %>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+<% end %>

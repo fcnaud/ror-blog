@@ -6,6 +6,12 @@
     <a href=<%= posts_user_path(@user) %> >posts</a>
   </li>
   <li class=<%= "active" if active_name=="comments"%>>
-    <a href=<%=comments_user_path(@user)%>>comments</a>
+    <a href=<%= comments_user_path(@user)%>>comments</a>
+  </li>
+  <li class=<%= "active" if active_name=="followers"%>>
+    <a href=<%= follower_user_path(@user)%>>followers</a>
+  </li>
+  <li class=<%= "active" if active_name=="followings"%>>
+    <a href=<%= following_user_path(@user)%>>followers</a>
   </li>
 </ul>

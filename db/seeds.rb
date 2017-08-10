@@ -21,3 +21,11 @@ Post.all.each do |post|
   post.save
 end
 
+
+User.all.each do |user|
+  url = LetterAvatar.generate Pinyin.t(user.username), 96
+  user.avatar_url = url.gsub('public/', '/')
+  p url
+  p user.avatar_url
+  user.save
+end

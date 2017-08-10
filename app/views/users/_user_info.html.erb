@@ -3,7 +3,7 @@
   <div class="panel-body">
     <div class="media">
       <div class="avatar media-left">
-        <%= letter_avatar_tag Pinyin.t(@user.username), 96, class: "av img-circle" %>
+        <%= image_tag @user.avatar_url,class: "avatar-96" %>
       </div>
       <div class="infos media-body">
         <div class="item">

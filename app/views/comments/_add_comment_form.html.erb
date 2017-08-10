@@ -27,21 +27,6 @@
         </div>
       </div>
 
-      <script>
-        $('.preview').click(function() {
-            $('#page_body').hide()
-            $('#preview').show()
-            $('#preview div').html('<p>loading...<p>')
-            $.post('/markdown', {body: $('#page_body').val()}, function(data)
-            {
-                $('#preview div').html(data.md2html)
-            })
-        })
-        $('.edit').click(function() {
-            $('#page_body').show()
-            $('#preview').hide()
-        })
-      </script>
 
   </div>
 </div>

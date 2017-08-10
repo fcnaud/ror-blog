@@ -6,6 +6,11 @@ class User < ApplicationRecord
   # validate email format
   # to do ...
 
-  has_many :comments
-  has_many :posts
+  has_many :comments, dependent: :destroy
+  has_many :posts, dependent: :destroy
+
+  has_many :follower_index, class_name: 'FollowerFollowing', foreign_key: :follower_id
+  has_many :following_index, class_name: 'FollowerFollowing', foreign_key: :following_id
+  has_many :followers, through: :following_index, dependent: :destroy
+  has_many :followings, through: :follower_index, dependent: :destroy
 end

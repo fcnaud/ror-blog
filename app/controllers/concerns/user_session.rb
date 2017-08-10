@@ -5,6 +5,9 @@ module Concerns
       base.class_eval do
         helper_method :logged_in?
         helper_method :current_user
+        helper_method :current_user?
+        helper_method :not_current_user?
+
       end
     end
 
@@ -28,6 +31,16 @@ module Concerns
       end
     end
 
-  end
+    def current_user? user
+      if logged_in?
+        current_user.id == user.id
+      else
+        false
+      end
+    end
+    def not_current_user? user
+      !current_user? user
+    end
 
+  end
 end
