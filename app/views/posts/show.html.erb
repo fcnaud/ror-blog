@@ -9,7 +9,14 @@
           <div class="infos">
             <%= link_to @post.author, user_path(User.find_by(username: @post.author)), class: "user-name" %>
             ·
-            created at <%= @post.created_at %>
+            created at <%= @post.created_at.to_date %>
+            <% if @post.comments.any? %>
+            ·
+            <%= @post.comments.last.commenter %>
+            ·
+            commented at
+            <%= @post.comments.last.created_at.to_date %>
+            <% end %>
             ·
             <%= @post.view_count %> 次阅读
           </div>

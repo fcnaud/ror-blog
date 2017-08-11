@@ -12,7 +12,7 @@
           </h4>
         </div>
         <div class="item">
-          created at <%= @user.created_at %>
+          created at <%= @user.created_at.to_date %>
         </div>
         <div class="item">
           have <%= @user.posts.count %> posts
