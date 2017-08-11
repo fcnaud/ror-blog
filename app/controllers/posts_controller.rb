@@ -23,6 +23,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by(id: params[:id])
+    Post.update_counters @post.id, view_count: 1
   end
 
   def destroy

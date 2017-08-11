@@ -8,8 +8,10 @@
           </h1>
           <div class="infos">
             <%= link_to @post.author, user_path(User.find_by(username: @post.author)), class: "user-name" %>
-            created at
-            <%= @post.created_at %>
+            ·
+            created at <%= @post.created_at %>
+            ·
+            <%= @post.view_count %> 次阅读
           </div>
         </div>
         <div class="media-right">
