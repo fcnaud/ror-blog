@@ -6,6 +6,9 @@ class User < ApplicationRecord
   # validate email format
   # to do ...
 
+  has_many :favourite_post_index, class_name: 'FavouritePost', foreign_key: :user_id
+  has_many :favourite_posts, through: :favourite_post_index, dependent: :destroy
+
   has_many :comments, dependent: :destroy
   has_many :posts, dependent: :destroy
 
