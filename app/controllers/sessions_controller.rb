@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(session_params)
+    @user = User.authenticate(session_params[:username], session_params[:password])
     if @user
       signin_user @user
       flash[:notice] = "login success"

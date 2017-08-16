@@ -20,12 +20,24 @@ class CommentsController < ApplicationController
   def destroy
     @post = Post.find_by(id: params[:post_id])
     @comment = @post.comments.find_by(id: params[:id])
-    user = User.find(session[:user_id])
-    if user.username == @comment.commenter
-      @comment.destroy
-      redirect_to post_path(@post)
+    if current_user? @comment.user
+      if @comment.destroy
+        render json: {
+            state: 1
+        }
+      else
+        render json: {
+            state: 0
+        }
+        flash[:notice] = "delete faild"
+      end
     else
-      render file: 'public/403.html'
+      render json: {
+          state: 0,
+          data: {
+              to_url: 'public/403.html'
+          }
+      }
     end
   end
 

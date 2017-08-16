@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   post 'markdown' => 'welcome#get_markdown'
 
   resources :posts do
+    member do 
+      get :edit_tag
+      get :add_tag
+      get :delete_tag
+    end
     resources :comments
   end
 
@@ -20,6 +25,7 @@ Rails.application.routes.draw do
   end
   resources :sessions
 
+  resources :tags, only: [:index, :create, :destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

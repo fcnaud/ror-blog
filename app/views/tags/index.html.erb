@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-lg-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">tags list</div>
+      <div class="panel-body tags-list">
+          <div class="tags-list">
+            <% @tags.each do |tag| %>
+              <div class="tag-box">
+                <a href="/">#<%= tag.name %>(<%= tag.posts.count %>)</a>
+                <%= link_to "", tag_path(tag.id), method: :delete, data: { confirm: "delete?"}, class: "fa fa-close"%>
+              </div>
+            <% end %>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">add tag</div>
+      <div class="panel-body">
+        <%= form_for @tag, method: :post, html: {role: "form"} do |f| %>
+            <div class="form-group">
+              <%= f.text_field :name, class: "form-control", placeholder: "tag name" %>
+            </div>
+            <div class="form-group">
+              <%= f.submit "submit", class: "btn btn-primary btn-block" %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

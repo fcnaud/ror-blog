@@ -53,6 +53,40 @@ class PostsController < ApplicationController
     end
   end
 
+  def delete_tag
+    @post = Post.find(params[:id])
+    @tag = Tag.find(params[:tag_id])
+    if !@tag
+      render json: {
+          state: 0
+      }
+    else
+      @post.tags.delete(@tag) if @post.tags.include?(@tag)
+      render json: {
+          state: 1
+      }
+    end
+  end
+  def add_tag
+    @post = Post.find(params[:id])
+    @tag = Tag.find(params[:tag_id])
+    if !@tag
+      render json: {
+          state: 0
+      }
+    else
+      @post.tags << @tag unless @post.tags.include?(@tag)
+      render json: {
+          state: 1
+      }
+    end
+  end
+  def edit_tag
+    @post = Post.find(params[:id])
+    @tag = Tag.find_by(name: params[:tag])
+    @tags = Tag.all
+  end
+
 private
   def post_params
     params.require(:post).permit(:title, :content)
@@ -61,6 +95,6 @@ private
     post_params.merge(author: current_user.username)
   end
   def edit_post_params
-    post_params
+    post_params.delete(:title)
   end
 end

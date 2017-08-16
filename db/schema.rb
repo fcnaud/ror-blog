@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170811163032) do
+ActiveRecord::Schema.define(version: 20170816162326) do
 
   create_table "comments", force: :cascade do |t|
     t.string "commenter"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 20170811163032) do
     t.index ["following_id"], name: "index_follower_followings_on_following_id"
   end
 
+  create_table "post_tags", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_tags_on_post_id"
+    t.index ["tag_id"], name: "index_post_tags_on_tag_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "author"
     t.text "content"
@@ -48,14 +57,21 @@ ActiveRecord::Schema.define(version: 20170811163032) do
     t.integer "view_count", default: 0
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
-    t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email"
     t.string "nickname"
     t.string "avatar_url"
+    t.string "crypted_password"
+    t.string "salt"
   end
 
 end

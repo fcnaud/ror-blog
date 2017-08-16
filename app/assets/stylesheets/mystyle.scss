@@ -115,12 +115,14 @@ body {
   .info {
     color:#c0c0c0;
     font-size:12px;
+    font-size:15px;
     a { color: #444; }
     .node {
-      color: #999;
+      color: #9995;
       font-weight: bold;
     }
     .user-name { color: $blue; font-size: 13px; }
+    .user-name { color: $blue; font-size: 15px; }
     .team-name {
       font-size: 13px;
       color: $green;
@@ -223,3 +225,4 @@ body {
     color: #e76f3c;
   }
 }
+

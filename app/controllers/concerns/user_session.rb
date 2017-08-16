@@ -7,7 +7,6 @@ module Concerns
         helper_method :current_user
         helper_method :current_user?
         helper_method :not_current_user?
-
       end
     end
 

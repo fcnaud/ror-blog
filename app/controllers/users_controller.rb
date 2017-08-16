@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_action :auth_user, only: [:unfollow, :follow]
 
+  attr_accessor :password_confirmation
+  attr_accessor :password
+
   def index
     @users = User.all
   end
@@ -11,9 +14,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(new_user_params)
-    @user.avatar_url = LetterAvatar.generate(@user.username, 96).gsub('public/', '/')
     if @user.save
-      redirect_to users_path
+      redirect_to new_session_path
     else
       render 'new'
     end
@@ -63,6 +65,6 @@ class UsersController < ApplicationController
 
   private
     def new_user_params
-      params.require(:user).permit(:username, :password)
+      params.require(:user).permit(:username, :password, :password_confirmation)
     end
 end

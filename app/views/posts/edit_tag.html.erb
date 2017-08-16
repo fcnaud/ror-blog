@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-lg-9">
+    <div class="topic-detail panel panel-default">
+      <div class="panel-heading media"> 当前post的标签</div>
+      <div class="panel-body"> 
+        <div class="tags-list" id="current-tags">
+          <% @post.tags.each do |tag| %>
+            <div class="tag-box" id=<%="tag-#{tag.id}"%> data-id=<%= tag.id %> data-post_id=<%= @post.id %>>
+                <a href="#">#<%= tag.name %>(<%= tag.posts.count %>)</a>
+                <a href="#" class="fa fa-close delete-tag"></a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-detail panel panel-default">
+      <div class="panel-heading media"> 所有的标签</div>
+      <div class="panel-body"> 
+        <div class="tags-list" id="all-tags">
+          <% @tags.each do |tag| %>
+            <div class="tag-box" id=<%="tag-#{tag.id}"%> data-id=<%= tag.id %> data-post_id=<%= @post.id %>>
+                <a href="#">#<%= tag.name %>(<%= tag.posts.count %>)</a>
+                <a href="#" class="fa fa-check add-tag"></a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">...</div>
+      <ul class="list-group">
+        <li class="list-group-item"><%= link_to "回到文章", post_path(@post) %></li>
+        <li class="list-group-item">...</li>
+        <li class="list-group-item">...</li>
+        <li class="list-group-item">...</li>
+      </ul>
+    </div>
+
+  </div>
+</div>

@@ -5,14 +5,18 @@
         <div class="media-body">
           <h1 class="media-heading">
             <%= @post.title %>
+            <% if logged_in? && current_user?(@post.user) %>
+            <%= link_to "edit", edit_post_path, class: "btn btn-default btn-sm" %>
+            <% end %>
           </h1>
-          <div class="infos">
+          <div class="info">
             <%= link_to @post.author, user_path(User.find_by(username: @post.author)), class: "user-name" %>
             ·
             created at <%= @post.created_at.to_date %>
             <% if @post.comments.any? %>
             ·
-            <%= @post.comments.last.commenter %>
+            <% user = @post.comments.last %>
+            <%= link_to user.commenter, user_path(user), class: "user-name"%>
             ·
             commented at
             <%= @post.comments.last.created_at.to_date %>
@@ -52,10 +56,27 @@
     <div class="panel panel-default">
       <div class="panel-heading">...</div>
       <ul class="list-group">
+        <li class="list-group-item"><%= link_to "回到文章", post_path(@post) %></li>
         <li class="list-group-item">...</li>
         <li class="list-group-item">...</li>
         <li class="list-group-item">...</li>
       </ul>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= @post.tags.count %> tags</div>
+      <div class="panel-body">
+        <div class="tags-list">
+          <% @post.tags.each do |tag| %>
+          <div class="tag-box">
+            <a href="#">#<%= tag.name %>(<%= tag.posts.count %>)</a>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <%= link_to "add tag", edit_tag_post_path, style: "clear: both" %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,6 +1,9 @@
 <div class="panel panel-default">
-  <div class="panel-heading">
-    <%= @post.comments.count %> comments
+  <div class="panel-heading" id="comments-count">
+    <b>
+     <%= @post.comments.count %>
+    </b>
+    comments
   </div>
   <div class="panel-body topics">
     <div class="topics-group">
@@ -38,8 +41,12 @@
         </div>
         <div class="media-right">
           <% if logged_in? && (current_user.username == comment.commenter) %>
-              <%= link_to "delete", [comment.post, comment], method: :delete,
+              <!--
+              <%= link_to "", [comment.post, comment], method: :delete, class: "fa fa-trash",
                           data: {confirm: "delete ?"} %>
+                         !-->
+              <a class="fa fa-trash" data-type="comment" data-post_id=<%= comment.post.id %> data-id=<%= comment.id %> href="#"></a>
+
           <% end %>
         </div>
       </div>
