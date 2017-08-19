@@ -27,7 +27,7 @@
         </div>
         <div class="media-right">
           <a href=<%= user_path(User.find_by(username: @post.author)) %>>
-            <%= image_tag @post.user.avatar_url, class: 'avatar-48' %>
+            <%= user_avatar_tag @post.user, :md, link: false %>
           </a>
         </div>
       </div>

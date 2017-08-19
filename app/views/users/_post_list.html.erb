@@ -1,24 +1,17 @@
 <div class="panel panel-default">
+  <div class="panel-body">
     <% if @posts.any? %>
       <ui class="list-group">
-        <% @posts.each do |post| %>
-          <li class="meida list-group-item">
-            <div class="media-body">
-              <div class="title media-heading">
-                <h4><%= link_to post.title, post_path(post) %>
-                  <small> created at <%= post.created_at %></small></h4>
-              </div>
-              <div class="info">
-                <%= post.content[0..50] %>
-              </div>
-            </div>
-            <div class="count media-right">
-              <% if post.comments.any? %>
-                  <%= link_to post.comments.count.to_s, post_path(post)+'#comment-'+post.comments.last.id.to_s %>
-              <% end %>
-            </div>
-          </li>
+        <table class="table table-striped">
+          <tbody>
+            <% @posts.each do |post| %>
+            <tr>
+              <td class="title"> <%= link_to post.title, post_path(post), style: "color:black" %> </td>
+              <td><%= post.comments.count %></td>
+            </tr>
+          </tbody>
         <% end %>
+        </table>
       </ui>
       <div class="panel-footer">
         <%= will_paginate @posts, class: "pagination" %>
@@ -28,4 +21,5 @@
         <p>nothing</p>
       </div>
     <% end %>
+  </div>
 </div>

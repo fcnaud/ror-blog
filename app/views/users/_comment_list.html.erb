@@ -2,14 +2,14 @@
   <% if @comments.any? %>
     <ui class="list-group">
       <% @comments.each do |comment| %>
-          <li class="list-group-item">
-            <div class="title media-heading">
-              <h4><%= link_to comment.post.title, post_path(comment.post) %>
+          <li class="list-group-item" >
+            <div class="title">
+              <h4><%= link_to comment.post.title, post_path(comment.post), style: "color:grey" %>
                 <small>at <%= comment.created_at %></small>
               </h4>
             </div>
             <div class="info">
-              <a href=<%= "#{post_path(comment.post)}#comment-#{comment.id}"%>>
+              <a href=<%= "#{post_path(comment.post)}#comment-#{comment.id}"%> style="color:grey">
                 <%= comment.body[0..50] %>
               </a>
             </div>

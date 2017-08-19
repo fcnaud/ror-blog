@@ -9,4 +9,12 @@ module ApplicationHelper
     Sanitize.fragment(text, Sanitize::Config::RELAXED)
   end
 
+  def timeago(time, options = {})
+    return "" if time.blank?
+    options[:class] = options[:class].blank? ? "timeago" : [options[:class], "timeago"].join(" ")
+    options[:title] = time.iso8601
+    text = time.to_date
+    content_tag :abbr, text, options
+  end
+
 end

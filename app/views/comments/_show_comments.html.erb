@@ -17,7 +17,7 @@
           <% else %>
           >
           <% end %>
-            <%= image_tag comment.user.avatar_url, class: 'avatar-48' %>
+            <%= user_avatar_tag comment.user, :md, link: false %>
           </a>
         </div>
         <div class="infos media-body">

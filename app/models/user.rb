@@ -1,15 +1,21 @@
+require 'carrierwave/orm/activerecord'
+
 class User < ApplicationRecord
   attr_accessor :password_confirmation
   attr_accessor :password
 
+  mount_uploader :avatar_url, AvatarUploader
+
   validates :username, presence: {message: "username empty"}
   validates :username, uniqueness: {message: "username exist"}
   validates :username, length: { maximum: 32, message: "用户名太长"}
-  validates :username, format: { with: /\A[a-zA-Z_]+\Z/, message: "用户名包含非法字符" }
+  validates :username, format: { with: /\A[a-zA-Z0-9_]+\Z/, message: "用户名包含非法字符" }
 
-  validates :password, presence: {message: "password empty"}
-  validates :password, length: { minimum:6, message: "password too short"}
-  validates :password, format: { with: /\A[a-zA-Z_]*\Z/, message: "密码包含非法字符"}
+  validates :password, presence: {message: "password empty"}, 
+                       length: { minimum:6, message: "password too short"},
+                       format: { with: /\A[a-zA-Z_]*\Z/, message: "密码包含非法字符"},
+                       on: :create
+
   validate :validate_password, on: :create
   before_create :set_password
   before_create :create_avatar
@@ -22,8 +28,8 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :posts, dependent: :destroy
 
-  has_many :follower_index, class_name: 'FollowerFollowing', foreign_key: :follower_id
   has_many :following_index, class_name: 'FollowerFollowing', foreign_key: :following_id
+  has_many :follower_index, class_name: 'FollowerFollowing', foreign_key: :follower_id
   has_many :followers, through: :following_index, dependent: :destroy 
   has_many :followings, through: :follower_index, dependent: :destroy
 
@@ -40,6 +46,11 @@ class User < ApplicationRecord
     self.crypted_password == Digest::SHA256::hexdigest(password+self.salt)
   end
 
+  def avatar_name
+    Pinyin.t(self.username)
+  end
+
+
 
   private
   def validate_password
@@ -51,7 +62,7 @@ class User < ApplicationRecord
   end
 
   def set_password
-    self.salt = Time.new.to_i
+    self.salt = SecureRandom.urlsafe_base64
     self.crypted_password = Digest::SHA256::hexdigest(self.password+self.salt)
   end
 

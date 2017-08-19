@@ -8,7 +8,7 @@
               <div class="topic media">
                 <div class="avatar media-left">
                   <a href=<%= user_path(post.user) %> >
-                    <%= image_tag post.user.avatar_url, class: "avatar-48" %>
+                    <%= user_avatar_tag post.user, :md, link: false %>
                   </a>
                 </div>
                 <div class="infos media-body">
@@ -17,12 +17,12 @@
                     <%= link_to post.author, user_path(User.find_by(username: post.author)), class: "user-name" %>
                     •
                     create
-                    <%= post.created_at %>
+                    <%= timeago(post.created_at) %>
                   </div>
                 </div>
-                <div class="count media-right">
+                <div class="media-right">
                   <% if post.comments.any? %>
-                  <a class="state-false" href=<%= post_path(post)+'#comment-'+post.comments.last.id.to_s %>>
+                  <a href=<%= post_path(post)+'#comment-'+post.comments.last.id.to_s %>>
                     <%= post.comments.count %>
                   </a>
                   <% end %>

@@ -3,7 +3,7 @@
       <div class="media user-card">
         <div class="media-left">
           <a href=<%= user_path(user) %>>
-            <%= image_tag user.avatar_url, class: 'avatar-48' %>
+            <%= user_avatar_tag user, :md %>
           </a>
         </div>
         <div class="media-body">
