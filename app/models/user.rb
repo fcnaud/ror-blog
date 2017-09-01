@@ -13,12 +13,12 @@ class User < ApplicationRecord
 
   validates :password, presence: {message: "password empty"}, 
                        length: { minimum:6, message: "password too short"},
-                       format: { with: /\A[a-zA-Z_]*\Z/, message: "密码包含非法字符"},
+                       format: { with: /\A[a-zA-Z0-9_]*\Z/, message: "密码包含非法字符"},
                        on: :create
 
   validate :validate_password, on: :create
   before_create :set_password
-  before_create :create_avatar
+  # before_create :create_avatar
   # validate email format
   # to do ...
 
@@ -67,7 +67,7 @@ class User < ApplicationRecord
   end
 
   def create_avatar
-    self.avatar_url = LetterAvatar.generate(self.username, 96).gsub('public/', '/')
+    LetterAvatar.generate Pinyin.t(self.username), 96
   end
 end
 

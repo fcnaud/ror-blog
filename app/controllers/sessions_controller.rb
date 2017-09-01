@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   def new
-
+    @username = session[:tmp_username]
+    session[:tmp_username] = nil
   end
 
   def create
@@ -8,7 +9,7 @@ class SessionsController < ApplicationController
     if @user
       signin_user @user
       flash[:notice] = "login success"
-      redirect_to session[:return_to]
+      redirect_to (session[:return_to] || root_path)
     else
       flash[:notice] = "login failed"
       render 'new'
