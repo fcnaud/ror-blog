@@ -1,4 +1,4 @@
-<%= form_for @user, url: update_avatar_user_path, method: :post do |f| %>
+<%= form_for @user, url: update_avatar_settings_path, method: :post do |f| %>
 <%= f.label "上传头像" %>
 <%= f.file_field :avatar_url %>
 <%= f.hidden_field :avatar_url_cache %>

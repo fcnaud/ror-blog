@@ -2,13 +2,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include Concerns::UserSession
-  include Concerns::UserAction
   include ApplicationHelper
 
 private
   def auth_user
     unless logged_in?
       flash[:notice] = "please login first"
+      session[:return_to] = request.url
       redirect_to new_session_path
     end
   end

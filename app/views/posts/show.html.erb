@@ -12,14 +12,14 @@
           <div class="info">
             <%= link_to @post.author, user_path(User.find_by(username: @post.author)), class: "user-name" %>
             ·
-            created at <%= @post.created_at.to_date %>
+            created at <%= timeago(@post.created_at) %>
             <% if @post.comments.any? %>
             ·
             <% user = @post.comments.last %>
             <%= link_to user.commenter, user_path(user), class: "user-name"%>
             ·
             commented at
-            <%= @post.comments.last.created_at.to_date %>
+            <%= timeago(@post.comments.last.created_at) %>
             <% end %>
             ·
             <%= @post.view_count %> 次阅读

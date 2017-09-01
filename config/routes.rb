@@ -19,8 +19,6 @@ Rails.application.routes.draw do
       get :posts
       get :follower
       get :following
-      get :uploader_avatar
-      post :update_avatar
       post :follow
       post :unfollow
     end
@@ -28,6 +26,15 @@ Rails.application.routes.draw do
   resources :sessions
 
   resources :tags, only: [:index, :create, :destroy]
+
+  resource :settings, only: [] do 
+    collection do
+      get :uploader_avatar
+      post :update_avatar
+    end
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
 
 end

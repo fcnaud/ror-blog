@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if @user
       signin_user @user
       flash[:notice] = "login success"
-      redirect_to root_path
+      redirect_to session[:return_to]
     else
       flash[:notice] = "login failed"
       render 'new'
