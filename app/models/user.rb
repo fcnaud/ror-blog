@@ -66,8 +66,8 @@ class User < ApplicationRecord
     self.crypted_password = Digest::SHA256::hexdigest(self.password+self.salt)
   end
 
-  def create_avatar
-    LetterAvatar.generate Pinyin.t(self.username), 96
-  end
+  #def create_avatar
+  #  LetterAvatar.generate Pinyin.t(self.username), 96
+  #end
 end
 

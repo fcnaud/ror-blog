@@ -31,7 +31,7 @@ module Concerns
     end
 
     def follow
-      unless @user.following? current_user 
+      unless following? current_user 
         @user.followers << current_user
       end
       render json: {

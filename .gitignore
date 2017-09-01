@@ -25,3 +25,6 @@
 .idea/*
 
 todo.md
+
+doc/ 
+.yardoc/
